@@ -11,14 +11,14 @@ import (
 )
 
 func RootHandler(w http.ResponseWriter, r *http.Request) {
-	file, err := os.Open("../index.html")
+	file, err := os.Open("index.html")
 	if err != nil {
 		http.Error(w, "file not found", http.StatusInternalServerError)
 		return
 	}
 	defer file.Close()
 
-	w.Header().Set("Content-Type", "text/html")
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	if _, err := io.Copy(w, file); err != nil {
 		http.Error(w, "", http.StatusInternalServerError)
 	}
